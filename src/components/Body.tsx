@@ -3,24 +3,36 @@ import styled from "styled-components";
 import ItemList from "./ItemList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
+import CartView from "./CartView";
+import { useAppSelector } from "../redux/hooks";
+
 
 export default function Body() {
+  const toggle = useAppSelector((state) => state.toggleCartView.value)
+
   return (
-    <CardContainer>
-      {ItemList.map((item) => {
-        return (
-          <Card key={item.id}>
-            <CardText>{item.name}</CardText>
-            <CardButtons>
-              <Button>
-                <FontAwesomeIcon icon={faCartPlus} />
-              </Button>
-            </CardButtons>
-          </Card>
-        );
-      })}
-    </CardContainer>
+    <div>
+      <CardContainer>
+        {ItemList.map((item) => {
+          return (
+            <Card key={item.id}>
+              <CardText>{item.name}</CardText>
+              <CardButtons>
+                <Button>
+                  <FontAwesomeIcon icon={faCartPlus} />
+                </Button>
+              </CardButtons>
+            </Card>
+          );
+        })}
+      </CardContainer>
+      {
+        toggle ? (
+          <CartView />
+        ) :
+        null
+      }
+    </div>
   );
 }
 

@@ -1,10 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface toggleState {
+  value: boolean
+}
+
+// Define the initial state using that type
+const initialState: toggleState = {
+  value: false,
+}
+
 export const toggleCartView = createSlice({
   name: "toggleCartView",
-  initialState: {
-    value: false,
-  },
+  initialState,
   reducers: {
     toggle: (state) => {
       state.value = !state.value;

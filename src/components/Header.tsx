@@ -9,8 +9,8 @@ export default function Header() {
 
   return (
     <HeaderContainer>
-      <CartButton onClick={() => dispatch(toggle())}>
-        <FontAwesomeIcon icon={faCartShopping} style={{ cursor: "pointer" }} />
+      <CartButton>
+        <FontAwesomeIcon onClick={() => dispatch(toggle())} icon={faCartShopping} style={{ cursor: "pointer" }} />
       </CartButton>
     </HeaderContainer>
   );
