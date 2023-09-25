@@ -1,18 +1,15 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { toggle } from "../redux/ToggleCartView";
 
 export default function Header() {
-  const [toggleCartView, setToggleCartView] = useState<boolean>(false);
-
-  const openCart = () => {
-    setToggleCartView(true);
-  };
+  const dispatch = useDispatch();
 
   return (
     <HeaderContainer>
-      <CartButton onClick={openCart}>
+      <CartButton onClick={() => dispatch(toggle())}>
         <FontAwesomeIcon icon={faCartShopping} style={{ cursor: "pointer" }} />
       </CartButton>
     </HeaderContainer>
