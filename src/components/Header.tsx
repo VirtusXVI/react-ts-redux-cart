@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header() {
+  const [toggleCartView, setToggleCartView] = useState<boolean>(false);
+
+  const openCart = () => {
+    setToggleCartView(true);
+  };
+
   return (
     <HeaderContainer>
-      <CartButton>
+      <CartButton onClick={openCart}>
         <FontAwesomeIcon icon={faCartShopping} style={{ cursor: "pointer" }} />
       </CartButton>
     </HeaderContainer>
