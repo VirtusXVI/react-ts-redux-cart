@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Item } from "../components/ItemList";
 
-interface CartObject {
+export interface CartObject {
   value: Array<Item>;
 }
 
@@ -15,10 +15,11 @@ export const Cart = createSlice({
   initialState,
   reducers: {
     add: (state, action: PayloadAction<Item>) => {
-      state.value.push(action.payload);
+      if(state.value.find((item) => item.id === action.payload.id)) return
+      return { ...state, value: [ ...state.value, action.payload ] }
     },
     remove: (state, action: PayloadAction<Item>) => {
-      state.value.splice(state.value.findIndex((element) => element.id == action.payload.id), 1);
+      return { ...state, value: state.value.filter((item) => item.id != action.payload.id) }
     }
   },
 });
