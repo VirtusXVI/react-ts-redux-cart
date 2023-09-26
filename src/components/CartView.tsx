@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { toggle } from "../redux/ToggleCartView";
+import { useAppSelector } from "../redux/hooks";
 
 export default function CartView() {
   const dispatch = useDispatch();
+  const cart = useAppSelector((state) => state.CartController.value)
 
   return (
     <CartContainer>
@@ -14,6 +16,15 @@ export default function CartView() {
         <CloseIcon onClick={() => dispatch(toggle())}>
           <FontAwesomeIcon icon={faXmark} />
         </CloseIcon>
+        <CartList>
+          {
+            cart.map((cartItem) => {
+              return <CartListItem key={cartItem.id}>
+                { cartItem.name }
+              </CartListItem>
+            })
+          }
+        </CartList>
       </Cart>
     </CartContainer>
   )
@@ -45,4 +56,12 @@ const CloseIcon = styled.div`
   align-self: flex-end;
   cursor: pointer;
   width: 2%;
+`
+
+const CartList = styled.div`
+
+`
+
+const CartListItem = styled.div`
+
 `

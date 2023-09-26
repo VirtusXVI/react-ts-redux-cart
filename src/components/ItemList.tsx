@@ -1,5 +1,5 @@
 // Define a type for the items in the array
-type Item = {
+export type Item = {
   id: number;
   name: string;
 };

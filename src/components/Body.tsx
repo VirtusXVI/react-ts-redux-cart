@@ -5,10 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import CartView from "./CartView";
 import { useAppSelector } from "../redux/hooks";
-
+import { useDispatch } from "react-redux";
+import { add } from "../redux/Cart";
 
 export default function Body() {
-  const toggle = useAppSelector((state) => state.toggleCartView.value)
+  const toggle = useAppSelector((state) => state.toggleCartView.value);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -18,7 +20,7 @@ export default function Body() {
             <Card key={item.id}>
               <CardText>{item.name}</CardText>
               <CardButtons>
-                <Button>
+                <Button onClick={() => dispatch(add(item))}>
                   <FontAwesomeIcon icon={faCartPlus} />
                 </Button>
               </CardButtons>
@@ -26,12 +28,7 @@ export default function Body() {
           );
         })}
       </CardContainer>
-      {
-        toggle ? (
-          <CartView />
-        ) :
-        null
-      }
+      {toggle ? <CartView /> : null}
     </div>
   );
 }
@@ -67,7 +64,7 @@ const CardButtons = styled.div`
   width: 11%;
   justify-content: flex-end;
   align-items: center;
-`
+`;
 const Button = styled.div`
   height: 30px;
   width: 30px;
@@ -75,4 +72,4 @@ const Button = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-`
+`;
