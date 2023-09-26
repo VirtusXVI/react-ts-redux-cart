@@ -1,14 +1,16 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { toggle } from "../redux/ToggleCartView";
 import { useAppSelector } from "../redux/hooks";
+import { remove } from "../redux/Cart";
 
 export default function CartView() {
   const dispatch = useDispatch();
-  const cart = useAppSelector((state) => state.CartController.value)
+  const cart = useAppSelector((state) => state.CartController.value);
 
   return (
     <CartContainer>
@@ -17,17 +19,18 @@ export default function CartView() {
           <FontAwesomeIcon icon={faXmark} />
         </CloseIcon>
         <CartList>
-          {
-            cart.map((cartItem) => {
-              return <CartListItem key={cartItem.id}>
-                { cartItem.name }
+          {cart.map((cartItem) => {
+            return (
+              <CartListItem key={cartItem.id}>
+                {cartItem.name}
+                <FontAwesomeIcon onClick={() => dispatch(remove(cartItem))} icon={faTrash} />
               </CartListItem>
-            })
-          }
+            );
+          })}
         </CartList>
       </Cart>
     </CartContainer>
-  )
+  );
 }
 
 const CartContainer = styled.div`
@@ -40,7 +43,7 @@ const CartContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const Cart = styled.div`
   background-color: white;
@@ -50,18 +53,14 @@ const Cart = styled.div`
   padding: 10px;
   display: flex;
   flex-direction: column;
-`
+`;
 
 const CloseIcon = styled.div`
   align-self: flex-end;
   cursor: pointer;
   width: 2%;
-`
+`;
 
-const CartList = styled.div`
+const CartList = styled.div``;
 
-`
-
-const CartListItem = styled.div`
-
-`
+const CartListItem = styled.div``;

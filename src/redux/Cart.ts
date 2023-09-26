@@ -16,10 +16,13 @@ export const Cart = createSlice({
   reducers: {
     add: (state, action: PayloadAction<Item>) => {
       state.value.push(action.payload);
+    },
+    remove: (state, action: PayloadAction<Item>) => {
+      state.value.splice(state.value.findIndex((element) => element.id == action.payload.id), 1);
     }
   },
 });
 
-export const { add } = Cart.actions;
+export const { add, remove } = Cart.actions;
 
 export default Cart.reducer;
