@@ -6,7 +6,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { toggle } from "../redux/ToggleCartView";
 import { useAppSelector } from "../redux/hooks";
-import { remove, CartObject } from "../redux/Cart";
+import { remove } from "../redux/Cart";
 
 export default function CartView() {
   const dispatch = useDispatch();
@@ -22,7 +22,8 @@ export default function CartView() {
           {cart.map((cartItem) => {
             return (
               <CartListItem key={cartItem.id}>
-                {cartItem.name}
+                {cartItem.name} 
+                {cartItem.quantity}
                 <FontAwesomeIcon
                   onClick={() => dispatch(remove(cartItem))}
                   icon={faTrash}

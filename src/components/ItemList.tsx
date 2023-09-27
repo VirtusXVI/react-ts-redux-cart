@@ -2,6 +2,7 @@
 export type Item = {
   id: number;
   name: string;
+  quantity: number;
 };
 
 // Define a type for the ItemList array
@@ -16,18 +17,22 @@ const ItemList: Readonly<ItemListType> = harden([
   {
     id: 1,
     name: "Pasta",
+    quantity: 0,
   },
   {
     id: 2,
     name: "Pizza",
+    quantity: 0,
   },
   {
     id: 3,
     name: "Pomodoro",
+    quantity: 0,
   },
   {
     id: 4,
     name: "Basilico",
+    quantity: 0,
   },
 ]);
 
