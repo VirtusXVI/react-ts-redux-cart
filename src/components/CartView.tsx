@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faTrash, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { toggle } from "../redux/ToggleCartView";
 import { useAppSelector } from "../redux/hooks";
-import { remove } from "../redux/Cart";
+import { remove, decreaseQuantity } from "../redux/Cart";
 
 export default function CartView() {
   const dispatch = useDispatch();
@@ -25,10 +24,16 @@ export default function CartView() {
                 {cartItem.name} 
                 {cartItem.quantity}
                 <FontAwesomeIcon
+                  onClick={() => dispatch(decreaseQuantity(cartItem))}
+                  icon={faMinus}
+                  style={{ cursor: "pointer" }}
+                />
+                <FontAwesomeIcon
                   onClick={() => dispatch(remove(cartItem))}
                   icon={faTrash}
                   style={{ cursor: "pointer" }}
                 />
+
               </CartListItem>
             );
           })}
